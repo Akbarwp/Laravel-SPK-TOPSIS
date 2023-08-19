@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         for ($j = 0; $j < 4; $j++) {
             for ($i = 0; $i < 4; $i++) {
                 SubKriteria::create([
-                    "kode" => $kode[$i] . $i+1,
+                    "kode" => $kode[$j] . $i+1,
                     "nama" => $nama[$i],
                     "nilai" => $nilai[$i],
                     "kriteria_id" => $j+1,
