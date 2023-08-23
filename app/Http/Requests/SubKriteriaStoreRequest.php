@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\SubKriteria;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SubKriteriaRequest extends FormRequest
+class SubKriteriaStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +27,22 @@ class SubKriteriaRequest extends FormRequest
         return [
             "kode" => "required|string|max:255",
             "nama" => "required|string|max:255",
-            "nilai" => "required|numeric",
+            "nilai" => "required|numeric|min:0|max:9",
             "kriteria_id" => "required|numeric",
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $cekKode = SubKriteria::where('kriteria_id', $this->kriteria_id)->get();
+        $ctr = 1;
+        foreach ($cekKode as $item) {
+            $ctr = substr($item->kode, 1) + 1;
+        }
+        $kode = rtrim($cekKode[0]->kode, "1") . $ctr;
+
+        $this->merge([
+            'kode' => $kode,
+        ]);
     }
 }

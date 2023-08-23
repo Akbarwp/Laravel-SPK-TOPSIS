@@ -15,6 +15,7 @@ class SubKriteria extends Model
     // protected $keyType = "string";
     public $timestamps = "true";
     protected $fillable = [
+        "kode",
         "nama",
         "nilai",
         "kriteria_id",

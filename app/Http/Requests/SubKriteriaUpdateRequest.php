@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\SubKriteria;
 use Illuminate\Foundation\Http\FormRequest;
 
-class KriteriaRequest extends FormRequest
+class SubKriteriaUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,16 +25,8 @@ class KriteriaRequest extends FormRequest
     public function rules()
     {
         return [
-            "kode" => "required|string|max:255",
             "nama" => "required|string|max:255",
-            "bobot" => "required|numeric|min:0.1|max:0.9",
+            "nilai" => "required|numeric|min:0|max:9",
         ];
     }
-
-    // public function messages()
-    // {
-    //     return [
-    //         'bobot.min' => 'The bobot must be at least :min.',
-    //     ];
-    // }
 }
