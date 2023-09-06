@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("alternatif_id")->constrained("alternatif", "id");
             $table->foreignId("kriteria_id")->constrained("kriteria", "id");
-            $table->foreignId("sub_kriteria_id")->constrained("sub_kriteria", "id");
+            $table->foreignId("sub_kriteria_id")->nullable()->constrained("sub_kriteria", "id");
             $table->timestamps();
         });
     }

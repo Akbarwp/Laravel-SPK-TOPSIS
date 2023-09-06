@@ -20,14 +20,14 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $breadcrumb = "Dashboard";
+        $judul = "Dashboard";
 
         $kriteria = $this->kriteriaService->getAll()->count();
         $subKriteria = $this->subKriteriaService->getAll()->count();
         $objek = $this->objekService->getAll()->count();
         
         return view('dashboard.index', [
-            "breadcrumb" => $breadcrumb,
+            "judul" => $judul,
             "kriteria" => $kriteria,
             "subKriteria" => $subKriteria,
             "objek" => $objek,

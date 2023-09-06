@@ -22,12 +22,9 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->objek->nama }}</td>
                                     <td class="flex gap-x-3">
-                                        <label for="edit_button" class="cursor-pointer" onclick="return edit_button('{{ $item->id }}')">
-                                            <i class="ri-pencil-line text-xl"></i>
-                                        </label>
-                                        <button onclick="return delete_button('{{ $item->id }}', '{{ $item->nama }}');">
+                                        <button onclick="return delete_button('{{ $item->id }}', '{{ $item->objek->nama }}');">
                                             <i class="ri-delete-bin-line text-xl"></i>
                                         </button>
                                     </td>
@@ -42,16 +39,25 @@
             <input type="checkbox" id="add_button" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box">
-                    <form action="{{ route('objek.simpan') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('alternatif.simpan') }}" method="post" enctype="multipart/form-data">
                         <h3 class="font-bold text-lg">Tambah {{ $judul }}</h3>
                             @csrf
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class="label-text">Nama</span>
+                                    <span class="label-text">Objek</span>
                                 </label>
-                                <input type="text" name="nama" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark" value="{{ old('nama') }}" required />
+                                <select class="select select-bordered text-dark" name="objek_id" id="objek_id">
+                                    <option disabled selected>Pilih Objek!</option>
+                                    @foreach ($objek as $item)
+                                        @if (old('objek_id') == $item->id)
+                                            <option value="{{ $item->id }}" selected>{{ $item->nama }}</option>
+                                        @else
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                                 <label class="label">
-                                    @error('nama')
+                                    @error('objek_id')
                                         <span class="label-text-alt text-error">{{ $message }}</span>
                                     @enderror
                                 </label>
@@ -63,35 +69,6 @@
                     </form>
                 </div>
                 <label class="modal-backdrop" for="add_button">Close</label>
-            </div>
-
-            {{-- Form Ubah Data --}}
-            <input type="checkbox" id="edit_button" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box" id="edit_form">
-                    <form action="{{ route('objek.perbarui') }}" method="post" enctype="multipart/form-data">
-                        <h3 class="font-bold text-lg">Ubah {{ $judul }}: <span class="text-greenPrimary" id="title_form"><span class="loading loading-dots loading-md"></span></span></h3>
-                            @csrf
-                            <input type="text" name="id" hidden />
-                            <div class="form-control w-full max-w-xs">
-                                <label class="label">
-                                    <span class="label-text">Nama</span>
-                                    <span class="label-text-alt" id="loading_edit1"></span>
-                                </label>
-                                <input type="text" name="nama" placeholder="Type here" class="input input-bordered w-full text-dark" required />
-                                <label class="label">
-                                    @error('nama')
-                                        <span class="label-text-alt text-error">{{ $message }}</span>
-                                    @enderror
-                                </label>
-                            </div>
-                        <div class="modal-action">
-                            <button type="submit" class="btn btn-success">Perbarui</button>
-                            <label for="edit_button" class="btn">Batal</label>
-                        </div>
-                    </form>
-                </div>
-                <label class="modal-backdrop" for="edit_button">Close</label>
             </div>
         </div>
     </div>
@@ -107,6 +84,8 @@
             })
             .columns.adjust()
             .responsive.recalc();
+
+            $("#objek_id").select2();
         });
 
         @if (session()->has('berhasil'))
@@ -139,37 +118,6 @@
             })
         @endif
 
-        function edit_button(id) {
-            // Loading effect start
-            let loading = `<span class="loading loading-dots loading-md text-greenPrimary"></span>`;
-            $("#title_form").html(loading);
-            $("#loading_edit1").html(loading);
-
-            $.ajax({
-                type: "get",
-                url: "{{ route('objek.ubah') }}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "id": id
-                },
-                success: function (data) {
-                    // console.log(data);
-                    let items = [];
-                    $.each(data, function(key, val) {
-                        items.push(val);
-                    });
-
-                    $("#title_form").html(`${items[1]}`);
-                    $("input[name='id']").val(items[0]);
-                    $("input[name='nama']").val(items[1]);
-
-                    // Loading effect end
-                    loading = "";
-                    $("#loading_edit1").html(loading);
-                }
-            });
-        }
-
         function delete_button(id, nama) {
             Swal.fire({
                 title: 'Apakah Anda yakin?',
@@ -187,13 +135,12 @@
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "post",
-                        url: "{{ route('objek.hapus') }}",
+                        url: "{{ route('alternatif.hapus') }}",
                         data: {
                             "_token": "{{ csrf_token() }}",
                             "id": id
                         },
                         success: function (response) {
-                            console.log(response);
                             Swal.fire({
                                 title: 'Data berhasil dihapus!',
                                 icon: 'success',
@@ -209,7 +156,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Data gagal dihapus!',
-                            })
+                            });
                         }
                     });
                 }

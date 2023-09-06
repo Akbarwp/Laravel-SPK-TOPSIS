@@ -61,8 +61,8 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        $namaObjek = ["Civic", "Saturn", "Ford", "Mazda"];
-        for ($i = 0; $i < 4; $i++) {
+        $namaObjek = ["Civic", "Saturn", "Ford", "Mazda", "Mercendez"];
+        for ($i = 0; $i < 5; $i++) {
             Objek::create([
                 "nama" => $namaObjek[$i],
             ]);

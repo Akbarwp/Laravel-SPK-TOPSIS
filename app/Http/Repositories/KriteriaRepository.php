@@ -3,15 +3,19 @@
 namespace App\Http\Repositories;
 
 use App\Models\Kriteria;
+use App\Models\Penilaian;
+use App\Models\SubKriteria;
 use Illuminate\Support\Facades\DB;
 
 class KriteriaRepository
 {
-    protected $kriteria;
+    protected $kriteria, $subKriteria, $penilaian;
 
-    public function __construct(Kriteria $kriteria)
+    public function __construct(Kriteria $kriteria, SubKriteria $subKriteria, Penilaian $penilaian)
     {
         $this->kriteria = $kriteria;
+        $this->subKriteria = $subKriteria;
+        $this->penilaian = $penilaian;
     }
 
     public function getAll()
@@ -50,7 +54,11 @@ class KriteriaRepository
 
     public function hapus($id)
     {
-        $data = $this->kriteria->where('id', $id)->delete();
+        $data = [
+            $this->penilaian->where('kriteria_id', $id)->delete(),
+            $this->subKriteria->where('kriteria_id', $id)->delete(),
+            $this->kriteria->where('id', $id)->delete(),
+        ];
         return $data;
     }
 

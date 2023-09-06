@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Kriteria;
 use App\Models\SubKriteria;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -35,11 +36,15 @@ class SubKriteriaStoreRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $cekKode = SubKriteria::where('kriteria_id', $this->kriteria_id)->get();
-        $ctr = 1;
-        foreach ($cekKode as $item) {
-            $ctr = substr($item->kode, 1) + 1;
+        if ($cekKode->first() != null) {
+            $ctr = 1;
+            foreach ($cekKode as $item) {
+                $ctr = substr($item->kode, 1) + 1;
+            }
+            $kode = rtrim($cekKode[0]->kode, "1") . $ctr;
+        } else {
+            $kode = Kriteria::where('id', $this->kriteria_id)->first()['kode'] . 1;
         }
-        $kode = rtrim($cekKode[0]->kode, "1") . $ctr;
 
         $this->merge([
             'kode' => $kode,

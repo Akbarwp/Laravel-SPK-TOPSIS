@@ -20,11 +20,11 @@ class SubKriteriaController extends Controller
 
     public function index()
     {
-        $breadcrumb = "Sub Kriteria";
+        $judul = "Sub Kriteria";
 
         $kriteria = $this->kriteriaService->getAll();
 
-        $data = [];
+        $data = null;
         foreach ($kriteria as $item) {
             $data[] = [
                 'kriteria_id' => $item->id,
@@ -34,7 +34,7 @@ class SubKriteriaController extends Controller
         }
 
         return view('dashboard.sub_kriteria.index', [
-            "breadcrumb" => $breadcrumb,
+            "judul" => $judul,
             "kriteria" => $kriteria,
             "data" => $data,
         ]);

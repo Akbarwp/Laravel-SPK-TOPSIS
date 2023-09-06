@@ -17,12 +17,12 @@ class ObjekController extends Controller
 
     public function index()
     {
-        $breadcrumb = "Objek";
+        $judul = "Objek";
 
         $data = $this->objekService->getAll();
 
         return view('dashboard.objek.index', [
-            "breadcrumb" => $breadcrumb,
+            "judul" => $judul,
             "data" => $data,
         ]);
     }
@@ -47,7 +47,11 @@ class ObjekController extends Controller
 
     public function hapus(Request $request)
     {
-        $this->objekService->hapusPostData($request->id);
-        return redirect('dashboard/objek');
+        try {
+            $this->objekService->hapusPostData($request->id);
+        } catch (\Throwable $th) {
+            return abort(400);
+        }
+        return redirect('dashboard/objek')->with('berhasil', "Data berhasil diperbarui!");
     }
 }

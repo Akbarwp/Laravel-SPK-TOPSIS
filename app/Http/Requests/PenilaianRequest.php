@@ -24,8 +24,6 @@ class PenilaianRequest extends FormRequest
     public function rules()
     {
         return [
-            "alternatif_id" => "required|numeric",
-            "kriteria_id" => "required|numeric",
             "sub_kriteria_id" => "required|numeric",
         ];
     }

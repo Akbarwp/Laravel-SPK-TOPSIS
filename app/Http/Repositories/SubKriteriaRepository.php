@@ -21,7 +21,7 @@ class SubKriteriaRepository
 
     public function getWhereKriteria($kriteria_id)
     {
-        $data = $this->subKriteria->where('kriteria_id', $kriteria_id)->get();
+        $data = $this->subKriteria->where('kriteria_id', $kriteria_id)->orderBy('nilai', 'desc')->get();
         return $data;
     }
 

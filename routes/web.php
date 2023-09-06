@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AlternatifController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\ObjekController;
+use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubKriteriaController;
+use App\Http\Controllers\TopsisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +22,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/dashboard2', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard2');
+// Route::get('/dashboard2', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard2');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -68,6 +71,28 @@ Route::group([
         Route::post('/ubah', [ObjekController::class, 'perbarui'])->name('objek.perbarui');
         Route::post('/hapus', [ObjekController::class, 'hapus'])->name('objek.hapus');
     });
+
+    Route::group([
+        'prefix' => 'alternatif'
+    ], function () {
+        Route::get('/', [AlternatifController::class, 'index'])->name('alternatif');
+        Route::post('/simpan', [AlternatifController::class, 'simpan'])->name('alternatif.simpan');
+        Route::post('/hapus', [AlternatifController::class, 'hapus'])->name('alternatif.hapus');
+    });
+
+    Route::group([
+        'prefix' => 'penilaian'
+    ], function () {
+        Route::get('/', [PenilaianController::class, 'index'])->name('penilaian');
+        Route::post('/simpan', [PenilaianController::class, 'simpan'])->name('penilaian.simpan');
+        Route::get('/ubah/{id}', [PenilaianController::class, 'ubah'])->name('penilaian.ubah');
+        Route::post('/ubah/{id}', [PenilaianController::class, 'perbarui'])->name('penilaian.perbarui');
+        Route::post('/hapus', [PenilaianController::class, 'hapus'])->name('penilaian.hapus');
+    });
+
+    Route::get('/perhitungan', [TopsisController::class, 'index'])->name('perhitungan');
+    Route::post('/hitung_topsis', [TopsisController::class, 'hitungTopsis'])->name('hitung_topsis');
+    Route::get('/hasil_akhir', [TopsisController::class, 'hasilAkhir'])->name('hasil_akhir');
 });
 
 require __DIR__.'/auth.php';

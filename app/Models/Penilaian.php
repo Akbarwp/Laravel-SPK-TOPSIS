@@ -14,5 +14,22 @@ class Penilaian extends Model
     public $incrementing = "true";
     // protected $keyType = "string";
     public $timestamps = "true";
-    protected $guarded = ["id"];
+    protected $fillable = [
+        "sub_kriteria_id",
+    ];
+
+    public function alternatif()
+    {
+        return $this->belongsTo(Alternatif::class);
+    }
+
+    public function kriteria()
+    {
+        return $this->belongsTo(Kriteria::class);
+    }
+
+    public function subKriteria()
+    {
+        return $this->belongsTo(SubKriteria::class);
+    }
 }
