@@ -6,7 +6,9 @@
 <script src="{{ asset('js/navbar-sticky.js') }}"></script>
 <script src="{{ asset('js/sidenav-burger.js') }}"></script>
 <script src="{{ asset('js/nav-pills.js') }}"></script>
-{{-- <script src="{{ asset('js/soft-ui-dashboard-tailwind.js') }}"></script> --}}
+
+{{-- ChartJS --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 {{-- SweetAlert2 --}}
 <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
