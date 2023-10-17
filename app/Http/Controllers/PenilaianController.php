@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PenilaianController extends Controller
 {
     protected $penilaianService, $subKriteriaService;
-    
+
     public function __construct(PenilaianService $penilaianService, SubKriteriaService $subKriteriaService)
     {
         $this->penilaianService = $penilaianService;

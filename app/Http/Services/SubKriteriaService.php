@@ -7,7 +7,7 @@ use App\Http\Repositories\SubKriteriaRepository;
 class SubKriteriaService
 {
     protected $subKriteriaRepository;
-    
+
     public function __construct(SubKriteriaRepository $subKriteriaRepository)
     {
         $this->subKriteriaRepository = $subKriteriaRepository;

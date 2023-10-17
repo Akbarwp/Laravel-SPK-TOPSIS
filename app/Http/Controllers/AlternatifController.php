@@ -12,7 +12,7 @@ use App\Http\Controllers\TopsisController;
 class AlternatifController extends Controller
 {
     protected $alternatifService, $objekService, $penilaianService, $topsisService;
-    
+
     public function __construct(AlternatifService $alternatifService, ObjekService $objekService, PenilaianService $penilaianService, TopsisController $topsisService)
     {
         $this->alternatifService = $alternatifService;

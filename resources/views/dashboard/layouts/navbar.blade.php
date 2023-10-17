@@ -32,7 +32,7 @@
                     </a>
                 </li> --}}
                 <li class="flex items-center pl-4 xl:hidden">
-                    <a href="#" class="block p-0 transition-all ease-nav-brand text-sm text-greenPrimary" sidenav-trigger>
+                    <a class="block p-0 transition-all ease-nav-brand text-sm text-greenPrimary" sidenav-trigger>
                         <div class="w-4.5 overflow-hidden">
                             <i class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-greenPrimary transition-all"></i>
                             <i class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-greenPrimary transition-all"></i>

@@ -49,7 +49,7 @@ class DashboardController extends Controller
         }
         $kriteriaID = rtrim($kriteriaID, ", ");
         $kriteriaBobot = rtrim($kriteriaBobot, ", ");
-        
+
         return view('dashboard.index', [
             "judul" => $judul,
             "jml_kriteria" => $kriteria->count(),

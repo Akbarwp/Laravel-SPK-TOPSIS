@@ -41,7 +41,7 @@
                             </table>
                         </div>
                     </div>
-                    @endforeach
+                @endforeach
             @else
                 <div class="relative flex flex-col min-w-0 mb-5 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                     <div class="flex flex-row items-center justify-between p-6 pb-0 mb-4 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
@@ -57,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -161,8 +161,8 @@
                     })
                     .columns.adjust()
                     .responsive.recalc();
-                    
-                    $("#label_{{ $item['kriteria'] }}").click(function () { 
+
+                    $("#label_{{ $item['kriteria'] }}").click(function () {
                         $("#title_add_button").html("{{ $item['kriteria'] }}");
                         $("#kriteria_id_add_button").val("{{ $item['kriteria_id'] }}");
                     });

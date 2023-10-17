@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         $kode = ["A", "B", "C", "D"];
         $nama = ["Sangat Baik", "Baik", "Biasa", "Kurang Baik"];
         $nilai = [9, 8, 7, 6];
-        
+
         $namaKriteria = ["Style", "Reliability", "Fuel-Economy", "Cost"];
         $bobot = [0.1, 0.4, 0.3, 0.2];
 
