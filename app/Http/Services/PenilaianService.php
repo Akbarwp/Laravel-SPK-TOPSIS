@@ -34,7 +34,7 @@ class PenilaianService
 
     public function simpanFromAlternatif($request)
     {
-        $data = $this->penilaianRepository->addFromAlternatif($request[1]->id);
+        $data = $this->penilaianRepository->addFromAlternatif($request[1]);
         return $data;
     }
 }

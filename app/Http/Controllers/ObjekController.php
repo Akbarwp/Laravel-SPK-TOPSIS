@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ObjekController extends Controller
 {
     protected $objekService;
-    
+
     public function __construct(ObjekService $objekService)
     {
         $this->objekService = $objekService;
@@ -53,5 +53,18 @@ class ObjekController extends Controller
             return abort(400);
         }
         return redirect('dashboard/objek')->with('berhasil', "Data berhasil diperbarui!");
+    }
+
+    public function import(Request $request)
+    {
+        // validasi
+        $request->validate([
+            'import_data' => 'required|mimes:xls,xlsx'
+        ]);
+
+        $this->objekService->import($request);
+
+        // alihkan halaman kembali
+        return redirect('dashboard/objek')->with('berhasil', "Data berhasil di import!");
     }
 }

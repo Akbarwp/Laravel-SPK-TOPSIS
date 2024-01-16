@@ -44,10 +44,10 @@
                             @csrf
                             <div class="form-control w-full max-w-xs">
                                 <label class="label">
-                                    <span class="label-text">Objek</span>
+                                    <span class="label-text">Pilih Objek</span>
                                 </label>
-                                <select class="select select-bordered text-dark" name="objek_id" id="objek_id">
-                                    <option disabled selected>Pilih Objek!</option>
+                                <select class="select select-bordered text-dark" name="objek_id[]" id="objek_id" multiple="multiple">
+                                    {{-- <option disabled selected>Pilih Objek!</option> --}}
                                     @foreach ($objek as $item)
                                         @if (old('objek_id') == $item->id)
                                             <option value="{{ $item->id }}" selected>{{ $item->nama }}</option>
@@ -85,7 +85,10 @@
             .columns.adjust()
             .responsive.recalc();
 
-            $("#objek_id").select2();
+            $("#objek_id").select2({
+                placeholder: "Select",
+                allowClear: true
+            });
         });
 
         @if (session()->has('berhasil'))

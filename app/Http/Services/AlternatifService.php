@@ -7,7 +7,7 @@ use App\Http\Repositories\AlternatifRepository;
 class AlternatifService
 {
     protected $alternatifRepository;
-    
+
     public function __construct(AlternatifRepository $alternatifRepository)
     {
         $this->alternatifRepository = $alternatifRepository;
@@ -21,17 +21,18 @@ class AlternatifService
 
     public function simpanPostData($request)
     {
-        $validate = $request->validated();
-        
         $alternatif = $this->alternatifRepository->getAll();
         foreach ($alternatif as $item) {
-            if ($validate['objek_id'] == $item->objek_id) {
-                $data = [false, "Data sudah ada di Alternatif"];
-                return $data;
+            // dd($request[$value], $item->objek_id);
+            foreach ($request as $value) {
+                if ($value == $item->objek_id) {
+                    $data = [false, "Data sudah ada di Alternatif"];
+                    return $data;
+                }
             }
         }
 
-        $data = [true, $this->alternatifRepository->simpan($validate)];
+        $data = [true, $this->alternatifRepository->simpan($request)];
         return $data;
     }
 

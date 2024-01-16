@@ -42,14 +42,16 @@ class PenilaianRepository
     {
         $kriteria = $this->kriteria->get();
 
-        foreach ($kriteria as $item) {
-            $this->penilaian->insert([
-                'alternatif_id' => $alternatif_id,
-                'kriteria_id' => $item->id,
-                'sub_kriteria_id' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ]);
+        foreach ($alternatif_id as $value) {
+            foreach ($kriteria as $item) {
+                $this->penilaian->insert([
+                    'alternatif_id' => $value->id,
+                    'kriteria_id' => $item->id,
+                    'sub_kriteria_id' => null,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ]);
+            }
         }
     }
 

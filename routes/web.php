@@ -70,6 +70,7 @@ Route::group([
         Route::get('/ubah', [ObjekController::class, 'ubah'])->name('objek.ubah');
         Route::post('/ubah', [ObjekController::class, 'perbarui'])->name('objek.perbarui');
         Route::post('/hapus', [ObjekController::class, 'hapus'])->name('objek.hapus');
+        Route::post('/import', [ObjekController::class, 'import'])->name('objek.import');
     });
 
     Route::group([

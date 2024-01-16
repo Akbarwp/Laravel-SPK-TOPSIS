@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\Penilaian;
 use App\Models\Alternatif;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class AlternatifRepository
@@ -19,14 +20,21 @@ class AlternatifRepository
     public function getAll()
     {
         $data = $this->alternatif->with('objek')->orderBy('created_at', 'asc')->get();
-        
+
         return $data;
     }
 
     public function simpan($data)
     {
-        $data = $this->alternatif->create($data);
-        return $data;
+        $input = [];
+        foreach ($data as $item) {
+            $input[] = $this->alternatif->create([
+                'objek_id' => $item,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]);
+        }
+        return $input;
     }
 
     public function getDataById($id)

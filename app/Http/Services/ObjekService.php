@@ -7,7 +7,7 @@ use App\Http\Repositories\ObjekRepository;
 class ObjekService
 {
     protected $objekRepository;
-    
+
     public function __construct(ObjekRepository $objekRepository)
     {
         $this->objekRepository = $objekRepository;
@@ -43,6 +43,12 @@ class ObjekService
     public function hapusPostData($request)
     {
         $data = $this->objekRepository->hapus($request);
+        return $data;
+    }
+
+    public function import($request)
+    {
+        $data = $this->objekRepository->import($request);
         return $data;
     }
 }

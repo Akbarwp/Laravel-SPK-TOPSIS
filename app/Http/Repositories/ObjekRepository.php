@@ -3,6 +3,8 @@
 namespace App\Http\Repositories;
 
 use App\Models\Objek;
+use App\Imports\ObjekImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ObjekRepository
 {
@@ -43,5 +45,16 @@ class ObjekRepository
     {
         $data = $this->objek->where('id', $id)->delete();
         return $data;
+    }
+
+    public function import($data)
+    {
+        // menangkap file excel
+        $file = $data->file('import_data');
+
+        // import data
+        $import = Excel::import(new ObjekImport, $file);
+
+        return $import;
     }
 }

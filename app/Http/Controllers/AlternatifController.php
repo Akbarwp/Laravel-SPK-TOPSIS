@@ -37,7 +37,7 @@ class AlternatifController extends Controller
 
     public function simpan(AlternatifRequest $request)
     {
-        $data = $this->alternatifService->simpanPostData($request);
+        $data = $this->alternatifService->simpanPostData($request->input('objek_id'));
         if (!$data[0]) {
             return redirect('dashboard/alternatif')->with('gagal', $data[1]);
         }

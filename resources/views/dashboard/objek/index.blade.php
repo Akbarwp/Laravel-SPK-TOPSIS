@@ -6,10 +6,16 @@
             <div class="relative flex flex-col min-w-0 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                 <div class="flex flex-row items-center justify-between p-6 pb-0 mb-4 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                     <h6>Tabel {{ $judul }}</h6>
-                    <label for="add_button" class="cursor-pointer inline-block px-3 py-2 font-bold text-center text-white rounded-lg text-sm ease-soft-in shadow-soft-md bg-gradient-to-br from-greenPrimary to-greenPrimary/80 shadow-soft-md hover:shadow-soft-xs active:opacity-85 hover:scale-102 transition-all">
-                        <i class="ri-add-fill"></i>
-                        Tambah {{ $judul }}
-                    </label>
+                    <div>
+                        <label for="add_button" class="cursor-pointer inline-block px-3 py-2 font-bold text-center text-white rounded-lg text-sm ease-soft-in shadow-soft-md bg-gradient-to-br from-greenPrimary to-greenPrimary/80 shadow-soft-md hover:shadow-soft-xs active:opacity-85 hover:scale-102 transition-all">
+                            <i class="ri-add-fill"></i>
+                            Tambah {{ $judul }}
+                        </label>
+                        <label for="import_button" class="cursor-pointer inline-block px-3 py-2 font-bold text-center text-white rounded-lg text-sm ease-soft-in shadow-soft-md bg-gradient-to-br from-greenPrimary to-greenPrimary/80 shadow-soft-md hover:shadow-soft-xs active:opacity-85 hover:scale-102 transition-all">
+                            <i class="ri-file-excel-line"></i>
+                            Import Data
+                        </label>
+                    </div>
                 </div>
                 <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
                     <table id="tabel_data" class="stripe hover" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
@@ -92,6 +98,33 @@
                     </form>
                 </div>
                 <label class="modal-backdrop" for="edit_button">Close</label>
+            </div>
+
+            {{-- Import Data --}}
+            <input type="checkbox" id="import_button" class="modal-toggle" />
+            <div class="modal">
+                <div class="modal-box">
+                    <form action="{{ route('objek.import') }}" method="post" enctype="multipart/form-data">
+                        <h3 class="font-bold text-lg">Import {{ $judul }}</h3>
+                            @csrf
+                            <div class="form-control w-full max-w-xs">
+                                <label class="label">
+                                    <span class="label-text">Import File</span>
+                                </label>
+                                <input type="file" name="import_data" class="file-input file-input-bordered w-full max-w-xs" required />
+                                <label class="label">
+                                    @error('import_data')
+                                        <span class="label-text-alt text-error">{{ $message }}</span>
+                                    @enderror
+                                </label>
+                            </div>
+                        <div class="modal-action">
+                            <button type="submit" class="btn btn-success">Import</button>
+                            <label for="import_button" class="btn">Batal</label>
+                        </div>
+                    </form>
+                </div>
+                <label class="modal-backdrop" for="import_button">Close</label>
             </div>
         </div>
     </div>

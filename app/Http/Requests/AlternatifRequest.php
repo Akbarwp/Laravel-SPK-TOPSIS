@@ -24,7 +24,7 @@ class AlternatifRequest extends FormRequest
     public function rules()
     {
         return [
-            "objek_id" => "required|numeric",
+            "objek_id" => "required",
         ];
     }
 }
