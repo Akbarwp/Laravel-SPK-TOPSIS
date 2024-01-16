@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\PDF;
+use App\Http\Services\TopsisService;
 use App\Http\Services\KriteriaService;
 use App\Http\Services\PenilaianService;
-use App\Http\Services\TopsisService;
 
 class TopsisController extends Controller
 {
     protected $topsisServices, $penilaianService, $kriteriaService;
-    
+
     public function __construct(TopsisService $topsisServices, PenilaianService $penilaianService, KriteriaService $kriteriaService)
     {
         $this->topsisServices = $topsisServices;
@@ -59,6 +59,53 @@ class TopsisController extends Controller
         ]);
     }
 
+    public function pdf_topsis()
+    {
+        $judul = 'Laporan Hasil TOPSIS';
+
+        $kriteria = $this->kriteriaService->getAll();
+        $penilaian = $this->penilaianService->getAll();
+        $matriksKeputusan = $this->topsisServices->getMatriksKeputusan();
+        $matriksNormalisasi = $this->topsisServices->getMatriksNormalisasi();
+        $matriksY = $this->topsisServices->getMatriksY();
+        $solusiIdealPositif = $this->topsisServices->getSolusiIdealPositif();
+        $solusiIdealNegatif = $this->topsisServices->getSolusiIdealNegatif();
+        $idealPositif = $this->topsisServices->getIdealPositif();
+        $idealNegatif = $this->topsisServices->getIdealNegatif();
+        $hasilTopsis = $this->topsisServices->getHasilTopsis();
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif'])->loadview('dashboard.pdf.perhitungan', [
+            'judul' => $judul,
+            'kriteria' => $kriteria,
+            'penilaian' => $penilaian,
+            'matriksKeputusan' => $matriksKeputusan,
+            'matriksNormalisasi' => $matriksNormalisasi,
+            'matriksY' => $matriksY,
+            'idealPositif' => $idealPositif,
+            'idealNegatif' => $idealNegatif,
+            'solusiIdealPositif' => $solusiIdealPositif,
+            'solusiIdealNegatif' => $solusiIdealNegatif,
+            'hasilTopsis' => $hasilTopsis,
+        ]);
+
+        // return $pdf->download('laporan-penilaian.pdf');
+        return $pdf->stream();
+    }
+
+    public function pdf_hasil()
+    {
+        $judul = "Laporan Hasil Akhir";
+        $hasilTopsis = $this->topsisServices->getHasilTopsis();
+
+        $pdf = PDF::setOptions(['defaultFont' => 'sans-serif'])->loadview('dashboard.pdf.hasil_akhir', [
+            'judul' => $judul,
+            'hasilTopsis' => $hasilTopsis,
+        ]);
+
+        // return $pdf->download('laporan-penilaian.pdf');
+        return $pdf->stream();
+    }
+
     public function hitungTopsis()
     {
         $this->hitungMatriksKeputusan();
@@ -86,7 +133,7 @@ class TopsisController extends Controller
         foreach ($penilaian->unique('kriteria_id') as $item) {
             $penilaianKriteria = $penilaian->where('kriteria_id', $item->kriteria_id);
             $hitungMatriks = 0;
-            
+
             foreach ($penilaianKriteria as $value) {
                 if ($value->sub_kriteria_id == null) {
                     abort(403, "Masukkan nilai alternatif ". $value->alternatif->objek->nama ."!");

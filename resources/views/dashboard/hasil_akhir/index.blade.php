@@ -6,6 +6,13 @@
             <div class="relative flex flex-col min-w-0 mb-5 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                 <div class="flex flex-row items-center justify-between p-6 pb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                     <h6>Hasil Perhitungan TOPSIS</h6>
+                    <form action="{{ 'pdf_hasil' }}" method="post" enctype="multipart/form-data" target="_blank">
+                        @csrf
+                        <button type="submit" class="btn btn-sm btn-active btn-error text-white hover:bg-error/95 hover:border-error/95">
+                            <i class="ri-file-pdf-line"></i>
+                            Export PDF
+                        </button>
+                    </form>
                 </div>
                 <div id='recipients' class="p-8 rounded shadow bg-white">
                     <table id="tabel_data_hasil" class="stripe hover" style="width:100%; padding-bottom: 1em;">
