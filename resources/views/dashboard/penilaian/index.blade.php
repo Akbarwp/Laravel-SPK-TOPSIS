@@ -7,6 +7,7 @@
                 <div class="flex flex-row items-center justify-between p-6 pb-0 mb-4 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                     <h6>Tabel {{ $judul }}</h6>
                 </div>
+
                 <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
                     <table id="tabel_data" class="stripe hover" style="width:100%; padding-top: 1em; padding-bottom: 1em;">
                         <thead>
@@ -20,11 +21,13 @@
                         <tbody>
                             @foreach ($data->unique('alternatif_id') as $item)
                                 <tr>
-                                    <td>{{ $item->alternatif->objek->nama }}</td>
+                                    <td>
+                                        {{ $item->alternatif->objek->nama }}
+                                        <a href="{{ route('penilaian.ubah', $item->alternatif_id) }}"><i class="ri-pencil-fill text-xl text-warning"></i></a>
+                                    </td>
                                     @foreach ($data->where('alternatif_id', $item->alternatif_id) as $value)
                                         <th>
                                             <span class="mr-2">@if ($value->subKriteria != null) {{ $value->subKriteria->nama }} @endif</span>
-                                            <a href="{{ route('penilaian.ubah', $value->id) }}"><i class="ri-pencil-fill text-xl text-warning"></i></a>
                                         </th>
                                     @endforeach
                                 </tr>

@@ -21,14 +21,14 @@ class PenilaianService
 
     public function ubahGetData($request)
     {
-        $data = $this->penilaianRepository->getDataById($request->id);
+        $data = $this->penilaianRepository->getDataByAlternatif($request->alternatif_id);
         return $data;
     }
 
     public function perbaruiPostData($request)
     {
-        $validate = $request->validated();
-        $data = [true, $this->penilaianRepository->perbarui($request->id, $validate)];
+        // $validate = $request->validated();
+        $data = $this->penilaianRepository->perbarui($request);
         return $data;
     }
 

@@ -26,16 +26,20 @@ class PenilaianRepository
 
     public function getDataById($id)
     {
-        $data = $this->penilaian->with('kriteria', 'subKriteria')->where('id', $id)->firstOrFail();
+        $data = $this->penilaian->with('kriteria', 'subKriteria', 'alternatif')->where('id', $id)->firstOrFail();
         return $data;
     }
 
-    public function perbarui($id, $data)
+    public function perbarui($data)
     {
-        $data = $this->penilaian->where('id', $id)->update([
-            "sub_kriteria_id" => $data['sub_kriteria_id'],
-        ]);
-        return $data;
+        // dd($data->all());
+        $responses = [];
+        foreach ($this->kriteria->get() as $value => $item) {
+            $responses[] = $this->penilaian->where('alternatif_id', $data->alternatif_id)->where('kriteria_id', $item->id)->update([
+                "sub_kriteria_id" => $data->kriteria_id[$value],
+            ]);
+        }
+        return $responses;
     }
 
     public function addFromAlternatif($alternatif_id)
@@ -58,6 +62,12 @@ class PenilaianRepository
     public function getDataByKriteria($kriteria_id)
     {
         $data = $this->penilaian->where('kriteria_id', $kriteria_id)->first();
+        return $data;
+    }
+
+    public function getDataByAlternatif($alternatif_id)
+    {
+        $data = $this->penilaian->where('alternatif_id', $alternatif_id)->get();
         return $data;
     }
 

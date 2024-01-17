@@ -35,20 +35,19 @@ class PenilaianController extends Controller
     {
         $judul = "Penilaian";
 
-        $data = $this->penilaianService->ubahGetData($request);
-        $subKriteria = $this->subKriteriaService->getAll()->where('kriteria_id', $data->kriteria_id);
-
-        $subJudul = $data->kriteria->nama;
+        $data = $this->penilaianService->ubahGetData($request)->first();
+        $data2 = $this->penilaianService->ubahGetData($request);
+        $subKriteria = $this->subKriteriaService->getAll();
 
         return view('dashboard.penilaian.edit', [
             "judul" => $judul,
-            "subJudul" => $subJudul,
             "data" => $data,
+            "data2" => $data2,
             "subKriteria" => $subKriteria,
         ]);
     }
 
-    public function perbarui(PenilaianRequest $request)
+    public function perbarui(Request $request)
     {
         $data = $this->penilaianService->perbaruiPostData($request);
         return redirect('dashboard/penilaian')->with('berhasil', "Data berhasil diperbarui!");

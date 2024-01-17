@@ -86,9 +86,10 @@ Route::group([
     ], function () {
         Route::get('/', [PenilaianController::class, 'index'])->name('penilaian');
         Route::post('/simpan', [PenilaianController::class, 'simpan'])->name('penilaian.simpan');
-        Route::get('/ubah/{id}', [PenilaianController::class, 'ubah'])->name('penilaian.ubah');
-        Route::post('/ubah/{id}', [PenilaianController::class, 'perbarui'])->name('penilaian.perbarui');
+        Route::get('/ubah/{alternatif_id}', [PenilaianController::class, 'ubah'])->name('penilaian.ubah');
+        Route::post('/ubah/{alternatif_id}', [PenilaianController::class, 'perbarui'])->name('penilaian.perbarui');
         Route::post('/hapus', [PenilaianController::class, 'hapus'])->name('penilaian.hapus');
+
     });
 
     Route::get('/perhitungan', [TopsisController::class, 'index'])->name('perhitungan');
