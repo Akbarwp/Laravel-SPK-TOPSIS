@@ -4,7 +4,7 @@ Laravel SPK TOPSIS is a website designed to provide a decision support system us
 
 ## Tech Stack
 
-- **Laravel 9**
+- **Laravel 9** --> **Laravel 12**
 - **Laravel Breeze**
 - **MySQL Database**
 - **TailwindCSS**
@@ -16,6 +16,7 @@ Laravel SPK TOPSIS is a website designed to provide a decision support system us
 
 - Main features available in this application:
   - Implementation TOPSIS method
+  - Import data --> example [Objek](https://github.com/user-attachments/files/19701329/Import.Objek.xlsx)
 
 ## Installation
 
@@ -78,40 +79,34 @@ Follow the steps below to clone and run the project in your local environment:
 
 ## Screenshot
 
-- ### **Login & Register page**
-
-<img src="public/img/dokumentasi/login.jpg" alt="Halaman Login" width="" />
-&nbsp;&nbsp;&nbsp;
-<img src="public/img/dokumentasi/register.jpg" alt="Halaman Register" width="" />
-<br><br>
-
 - ### **Dashboard**
 
-<img src="public/img/dokumentasi/dashboard.jpg" alt="Halaman Dashboard" width="" />
+<img src="https://github.com/user-attachments/assets/4fbcd91e-423d-44fb-822f-d5b2c2347a9c" alt="Halaman Dashboard" width="" />
 <br><br>
 
 - ### **Criteria page**
 
-<img src="public/img/dokumentasi/kriteria.jpg" alt="Halaman Kriteria" width="" />
+<img src="https://github.com/user-attachments/assets/01140afc-eca4-4573-ae4d-d6813370734a" alt="Halaman Kriteria" width="" />
 <br><br>
 
 - ### **Sub Criteria page**
 
-<img src="public/img/dokumentasi/sub-kriteria.jpg" alt="Halaman Sub Kriteria" width="" />
+<img src="https://github.com/user-attachments/assets/90fea88c-6bc9-403d-b9bb-a8fc01cbd762" alt="Halaman Sub Kriteria" width="" />
 <br><br>
 
 - ### **Object & Alternative page**
 
-<img src="public/img/dokumentasi/objek.jpg" alt="Halaman Objek" width="" />
-&nbsp;&nbsp;&nbsp;
-<img src="public/img/dokumentasi/alternatif.jpg" alt="Halaman Alternatif" width="" />
+<img src="https://github.com/user-attachments/assets/baa88d6b-e62d-43a6-b65f-eb655d4d8b2e" alt="Halaman Objek" width="" />
+<br><br>
+<img src="https://github.com/user-attachments/assets/f2523ce1-84bb-4392-9df8-43b04e2a9cc0" alt="Halaman Alternatif" width="" />
+<br><br>
+
+- ### **Penilaian page**
+
+<img src="https://github.com/user-attachments/assets/7d9fd487-8b68-4312-b2c4-328638bee0a1" alt="Halaman Penilaian" width="" />
 <br><br>
 
 - ### **Result page**
 
-<img src="public/img/dokumentasi/penilaian.jpg" alt="Halaman Penilaian" width="" />
-&nbsp;&nbsp;&nbsp;
-<img src="public/img/dokumentasi/perhitungan.jpg" alt="Halaman Perhitungan" width="" />
-&nbsp;&nbsp;&nbsp;
-<img src="public/img/dokumentasi/hasil-akhir.jpg" alt="Halaman Hasil Akhir" width="" />
+<img src="https://github.com/user-attachments/assets/cdc5717d-6f2a-41d3-ae03-48e6e090fbd3" alt="Halaman Penilaian" width="" />
 <br><br>
