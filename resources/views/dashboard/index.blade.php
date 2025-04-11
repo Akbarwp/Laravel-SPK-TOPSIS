@@ -215,10 +215,17 @@
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
+        let kriteriaId = [];
+        let kriteriaBobot = [];
+        @foreach ($kriteria as $item)
+            kriteriaId.push(' {{ $item->id }} ');
+            kriteriaBobot.push(' {{ $item->bobot }} ');
+        @endforeach
+
         new Chart(ctx, {
         type: "bar",
         data: {
-            labels: [{{ $kriteriaID }}],
+            labels: kriteriaId,
             datasets: [
             {
                 label: "Bobot",
@@ -227,7 +234,7 @@
                 borderRadius: 4,
                 borderSkipped: false,
                 backgroundColor: "#fff",
-                data: [{{ $kriteriaBobot }}],
+                data: kriteriaBobot,
                 maxBarThickness: 6,
             },
             ],
@@ -300,10 +307,17 @@
         gradientStroke2.addColorStop(0.2, "rgba(72,72,176,0.0)");
         gradientStroke2.addColorStop(0, "rgba(20,23,39,0)"); //purple colors
 
+        let alternatif = [];
+        let nilai = [];
+        @foreach ($hasilTopsis as $item)
+            alternatif.push(' {{ $item->nama_objek }} ');
+            nilai.push(' {{ $item->nilai }} ');
+        @endforeach
+
         new Chart(ctx2, {
         type: "line",
         data: {
-            labels: [{{ $hasilAlternatif }}],
+            labels: alternatif,
             datasets: [
             {
                 label: "Nilai",
@@ -314,7 +328,7 @@
                 borderWidth: 3,
                 backgroundColor: gradientStroke1,
                 fill: true,
-                data: [{{ $hasilNilai }}],
+                data: nilai,
                 maxBarThickness: 6,
             },
             ],

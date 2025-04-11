@@ -24,10 +24,17 @@ class KriteriaController extends Controller
         $data = $this->kriteriaService->getAll();
         $sumBobot = $this->kriteriaService->getSumBobot()->total_bobot;
 
+        if ($data->last()) {
+            $kode = "K" . str_pad((int) substr($data->last()->kode, 1) + 1, 5, '0', STR_PAD_LEFT);
+        } else {
+            $kode = "K00001";
+        }
+
         return view('dashboard.kriteria.index', [
             "judul" => $judul,
             "data" => $data,
             "sumBobot" => $sumBobot,
+            "kode" => $kode,
         ]);
     }
 

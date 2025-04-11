@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('kriteria', function (Blueprint $table) {
             $table->id();
-            $table->string("kode");
+            $table->string("kode", 6);
             $table->string("nama");
             $table->double("bobot");
             $table->timestamps();

@@ -30,25 +30,7 @@ class DashboardController extends Controller
         $subKriteria = $this->subKriteriaService->getAll()->count();
         $objek = $this->objekService->getAll()->count();
         $alternatif = $this->alternatifService->getAll()->count();
-
         $hasilTopsis = $this->topsisServices->getHasilTopsis();
-        $hasilAlternatif = "";
-        $hasilNilai = "";
-        foreach ($hasilTopsis as $item) {
-            $hasilAlternatif .= $item->alternatif_id . ", ";
-            $hasilNilai .= number_format($item->nilai, 3) . ", ";
-        }
-        $hasilAlternatif = rtrim($hasilAlternatif, ", ");
-        $hasilNilai = rtrim($hasilNilai, ", ");
-
-        $kriteriaID = "";
-        $kriteriaBobot = "";
-        foreach ($kriteria as $item) {
-            $kriteriaID .= $item->id . ", ";
-            $kriteriaBobot .= number_format($item->bobot, 3) . ", ";
-        }
-        $kriteriaID = rtrim($kriteriaID, ", ");
-        $kriteriaBobot = rtrim($kriteriaBobot, ", ");
 
         return view('dashboard.index', [
             "judul" => $judul,
@@ -56,11 +38,8 @@ class DashboardController extends Controller
             "subKriteria" => $subKriteria,
             "objek" => $objek,
             "alternatif" => $alternatif,
-            "hasilAlternatif" => $hasilAlternatif,
-            "hasilNilai" => $hasilNilai,
-            "kriteriaID" => $kriteriaID,
-            "kriteriaBobot" => $kriteriaBobot,
             "kriteria" => $kriteria,
+            "hasilTopsis" => $hasilTopsis,
         ]);
     }
 }

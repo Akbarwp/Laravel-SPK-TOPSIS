@@ -72,7 +72,7 @@
                                 <label class="label">
                                     <span class="label-text">Kode</span>
                                 </label>
-                                <input type="text" name="kode" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark" value="{{ old('kode') }}" required />
+                                <input type="text" name="kode" placeholder="Type here" class="input input-bordered w-full max-w-xs text-dark bg-slate-100" value="{{ $kode }}" required readonly />
                                 <label class="label">
                                     @error('kode')
                                         <span class="label-text-alt text-error">{{ $message }}</span>
